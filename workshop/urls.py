@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^register/$', views.register),
     url(r'^posts/$', views.posts),
     url(r'^new_post/$', views.new_post),
-    url(r'^edit_post/$', views.edit_post),
-    url(r'^post_detail/(\d+)$', view.post_detail),
+    url(r'^post_detail/(\d+)$', views.post_detail),
+    url(r'^logout/', views.logout_blog),
+    url(r'^add_comment/(\d+)', views.add_comment),
 ]

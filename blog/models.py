@@ -1,33 +1,22 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
-class Author(models.Model):
-    name = models.CharField(max_length = 20)
-    email = models.EmailField(verbose_name = 'e-mail')
-    
-    def __str__(self):
-        return self.name
-    
-    
 class Post(models.Model):
-    author = models.ForeignKey(Author)
+    author = models.ForeignKey(User)
     title = models.CharField(max_length=80)
     text = models.TextField()
-    created_date = models.DateTimeField(
-            default=timezone.now)
-    published_date = models.DateTimeField(
-            blank=True, null=True)
-    
+    created_date = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
-        return self.author.name
+        return self.author.first_name
     
     
 class Comment(models.Model):
-    author = models.OneToOneField(Author)
+    author = models.ForeignKey(User)
     post = models.ForeignKey(Post)
     text = models.TextField()
-    post_date = models.DateTimeField(default = timezone.now)
+    post_date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.author + "commented"
-    
+        return self.author.first_name + "commented"
